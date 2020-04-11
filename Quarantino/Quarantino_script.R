@@ -97,3 +97,114 @@ library(RDocumentation)
 help(package = "vioplot")
 install.packages('KernSmooth')
 library(KernSmooth)
+
+
+#solving fxns in R
+#say 5x=10
+solve(5,10)#gives x=2
+##3x+2y=8 & x+y=2
+a<-matrix(c(3,1,2,1),2,2)
+a
+b<-matrix(c(8,2),2,1)
+b
+solve(a,b)
+#LOOPS AND CONDITION STATEMENTS
+
+##FOR LOOPS
+samples<-c(rep(1:10))
+samples
+for (thissample in samples)
+
+{
+ print(thissample) 
+}
+#now sth inside the for loop
+for (thissample in samples)
+{
+  str<-paste(thissample,'is current sample',sep='')
+  print(str)
+}
+#terminate the loop when the sample =3
+for (thissample in samples)
+{
+  if (thissample==3)break
+  str<-paste(thissample,'is current sample',sep='')
+  print(str)
+}  
+#ignore when the sample number is even
+for (thissample in samples)
+{
+  if(thissample %%2 ==0)next
+  str<-paste(thissample,'is current sample',sep='')
+  print(str)
+}  
+##the last three samples
+end<-length(samples)
+begin<-end - 2
+for(thissample in begin:end)
+{
+  str<-paste(thissample,'is current sample',sep='')
+  print(str)
+}
+#the break statement is used to terminate the loop abruptly
+#the next statement is used to just ignore current cycle
+
+##IF ELSE STATEMENT
+#Syntax if (condition) {...}else{...}.if else statement can be nested
+samples<-c(rep(1:10))
+samples
+#even sample numbers using if else
+for(thissample in samples)
+{
+  if (thissample %% 2 !=0)next
+  else print(thissample)
+}  
+#the ifelse fxn is a vectorized version of if else.
+#it's syntax is ifelse(condition,v1,v2)
+#ie if condition is true return v1 ,otherwise v2
+#eg if we want samples with no. >6 be number 2,and those not be 1s
+ret<-ifelse(samples>6,2,1)
+ret
+
+##repeat
+
+#similaar to while and for 
+#execute block of commands repeatedly till break
+total<-0
+repeat{total<-total+1;print(total);if (total>6) break;}
+
+##while loop
+#executes a block of commands until cond is no longer satisfied
+#syntax is while(cond)expr
+x<-1
+while(x<5){x<-x+1;print(x);}
+#next can skip one of the loop,break will end loop abruptly
+
+#eg break when x=3
+x<-1
+while(x<5){x<-x+1;if(x == 3 )break;print(x); }
+#eg skip when x=3
+x<-1
+while(x<5){x<-x+1;if (x==3)next;print(x) }
+
+##which function
+
+#-gives true indices of a logical object
+#-allows for array indices this way
+
+#syntax      which(x, arr.ind = FALSE, useNames = TRUE)
+#            arrayInd(ind, .dim, .dimnames = NULL, useNames = FALSE)
+
+#x :logical array/vector.NAs are allowed and omitted (treated as if FALSE)
+#arr.ind :logical;should array indices be returned when x is an array?
+#ind:integer valued index vector,as resulting from which(x)
+#.dim:integer vector
+#.dimnames:optional list of character dimnames(.), of which only .dimnames[[1]] is used
+#useNames:logical indicating if the value of arrayInd() shld have (non-null) dimnames at al
+which (letters == "h" )
+BOD #Biochemical oxygen demand data frame
+which(BOD$demand == 16)
+x <- matrix(1:9,3,3)
+x
+which(x %% 3 == 0, arr.ind=TRUE)
+which(x %% 3 == 0, arr.ind=FALSE)
